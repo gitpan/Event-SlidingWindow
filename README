@@ -2,7 +2,7 @@ Event/SlidingWindow
 ===================
 
 Event::SlidingWindow allows you to create a time window of a fixed length and 
-keeps track of how many events have occured wihtin that window as it advances 
+keeps track of how many events have occured within that window as it advances 
 in time. It was created for use in daemons in order to detect denial of service 
 attacks.
 
@@ -17,7 +17,7 @@ To install this module type the following:
 
 COPYRIGHT AND LICENCE
 
-Copyright (C) 2004 Patrick LeBoutillier
+Copyright (C) 2004-2005 Patrick LeBoutillier
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 

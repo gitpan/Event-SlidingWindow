@@ -4,10 +4,9 @@ use strict ;
 use Carp ;
 
 
-$Event::SlidingWindow::VERSION = '0.03' ;
+$Event::SlidingWindow::VERSION = '0.05' ;
 
 
-# Preloaded methods go here.
 sub new {
 	my $class = shift ;
 	my $nb_buckets = int(shift) ;		# Number of buckets, i.e. window size
@@ -45,16 +44,19 @@ sub _init {
 
 sub record_event {
 	my $this = shift ;
+	my $now = shift ;
+	my $incr = shift || 1 ;
 	
-	$this->_update() ;
-	$this->{loop}->[$this->{cur_idx}]++ ;
+	$this->_update($now) ;
+	$this->{loop}->[$this->{cur_idx}] += $incr ;
 }
 
 
 sub count_events {
 	my $this = shift ;
+	my $now = shift ;
 	
-	$this->_update() ;
+	$this->_update($now) ;
 	my $cnt = 0 ;
 	foreach my $c (@{$this->{loop}}){
 		$cnt += $c ;
@@ -68,8 +70,8 @@ sub count_events {
 # from current time value.
 sub _update {
 	my $this = shift ;
+	my $now = shift || time() ;
 
-	my $now = time() ;
 	my $interval = int(($now - $this->{cur_ts}) / $this->{bucket_size}) ;
 	if (! $interval){
 		return ;
@@ -106,7 +108,7 @@ sub _dump {
 __END__
 =head1 NAME
 
-Event::SlidingWindow - Count events that occur within a sliding window
+Event::SlidingWindow - Count events that occur within a fixed sliding window of time
 
 =head1 SYNOPSIS
 
@@ -119,7 +121,7 @@ Event::SlidingWindow - Count events that occur within a sliding window
 =head1 DESCRIPTION
 
 Event::SlidingWindow allows you to create a time window of a fixed length and 
-keeps track of how many events have occured wihtin that window as it advances 
+keeps track of how many events have occured within that window as it advances 
 in time. It was created for use in daemons in order to detect denial of service 
 attacks.
 
@@ -130,7 +132,7 @@ Patrick LeBoutillier, E<lt>patl@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004 by Patrick LeBoutillier
+Copyright 2004-2005 by Patrick LeBoutillier
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 

@@ -31,7 +31,7 @@ print STDERR <<TXT;
 
 You will now play a boxing match against me. To hit me you must press the 
 ENTER key. If you hit me more than 5 times within 5 seconds you will win 
-and the test be over. If you hit me at a lower rate I will be able to 
+and the test will be over. If you hit me at a lower rate I will be able to 
 continue.
 TXT
 
