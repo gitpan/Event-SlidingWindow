@@ -4,7 +4,7 @@ use strict ;
 use Carp ;
 
 
-$Event::SlidingWindow::VERSION = '0.02' ;
+$Event::SlidingWindow::VERSION = '0.03' ;
 
 
 # Preloaded methods go here.

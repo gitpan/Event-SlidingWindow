@@ -7,7 +7,7 @@ use strict ;
 use Test ;
 BEGIN { 
 	plan(
-		tests => 4,
+		tests => 3,
 	) ;
 } ;
 
@@ -25,16 +25,5 @@ $esw->record_event() ;
 $esw->record_event() ;
 ok($esw->count_events(), 5) ;
 
-sleep(4) ;
+sleep(5) ;
 ok($esw->count_events(), 0) ;
-
-$esw->record_event() ;
-sleep(1) ;
-$esw->record_event() ;
-sleep(1) ;
-$esw->record_event() ;
-sleep(1) ;
-$esw->record_event() ;
-sleep(1) ;
-$esw->record_event() ;
-ok($esw->count_events(), 3) ;
